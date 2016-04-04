@@ -13,23 +13,26 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mean.model.User;
 import com.mean.services.UserService;
 
 
+
 @Controller
-@Path("/contactlist")
+@Path(value = "/contactlist")
 public class JSONService {
 
-	@Autowired
+	
 	private UserService userservice;
+	
+	
 	 public JSONService() {
 	System.out.println("JSON CONSTRUCTIOB");
 	}
 	
 	@GET
-	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getuser() {
 
@@ -48,18 +51,25 @@ public class JSONService {
 		            .header("Access-Control-Allow-Credentials", "true")
 		            .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
 		            .header("Access-Control-Max-Age", "1209600")
-		            .entity("hi")
+		            .entity("hi from get")
 		            .build();
 	}
 
 	@POST
-	@Path("/post")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createTrackInJSON(@ModelAttribute User user ) {
 
 		String result = "User saved : " + user.getName();
 		System.out.println(result);
-		return Response.status(201).entity(result).build();
+		 return Response
+		            .status(200)
+		            .header("Access-Control-Allow-Origin", "*")
+		            .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+		            .header("Access-Control-Allow-Credentials", "true")
+		            .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+		            .header("Access-Control-Max-Age", "1209600")
+		            .entity("hi from post")
+		            .build();
 		
 	}
 	
